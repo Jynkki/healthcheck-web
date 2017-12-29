@@ -1,0 +1,46 @@
+extends layout
+
+block content
+	.container-fluid
+		div.container-fluid
+			div.row
+				div.col-sm-6.col-md-6.col-lg-6
+				//	if user.atDesk == true
+				h1
+					| Device Status &nbsp;&nbsp;
+				//			span.glyphicon.glyphicon-ok.text-success
+				//	else
+				//		h1
+				//			| Time Report &nbsp;&nbsp;
+				//			span.glyphicon.glyphicon-remove.text-danger
+				//div.col-sm-4.col-md-4.col-lg-4
+				//div.col-sm-6.col-sm-offset-4.col-md-6.col-md-offset-4.col-lg-6
+			table.table#domainsTable.table-hover.table-bordered.tablesorter
+				thead
+					tr
+						th Time
+						th DeviceId
+						th Status
+						th Reason
+				each item, i in devices
+					- title= 'test'
+					tr
+						td #{item.time}
+						td #{item.deviceid}
+						td #{item.status}
+						td #{item.reason}
+			script.
+				$(document).ready(function() {
+					$("#domainsTable").tablesorter({
+						dateFormat : "ddmmyyyy", // set the default date format
+									// or to change the format for specific columns, add the dateFormat to the headers option:
+						sortList: [[0,1]],
+						headers: {
+							0: { sorter: "shortDate" },
+							1: { sorter: false },
+							2: { sorter: false },
+						//	3: { sorter: false },
+						//	4: { sorter: false },
+						}
+					});
+				});

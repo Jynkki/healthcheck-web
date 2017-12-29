@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-xs-8
+        h1 Active number of devices #{count}
+    .row
+      .col-xs-3.col-xs-offset-3
+        - var value = 10;
+        .input-group.number-spinner
+          span.input-group-btn.data-dwn
+            button.btn.btn-default.btn-info(data-dir='dwn')
+              span.glyphicon.glyphicon-minus
+          input.form-control.text-center(type='text', value='#{count}', min='0', max='20')
+          span.input-group-btn.data-up
+            button.btn.btn-default.btn-info(data-dir='up')
+              span.glyphicon.glyphicon-plus
+          span.input-group-btn
+            form(id="input", method="post", action="/addevices")
+              input(type='hidden', name='value', value='#{count}', class='form-control')
+              button.btn.btn-primary(type='submit') Submit
+    .row
+      .col-xs-3.col-xs-offset-3
+        max number of devices is 20
+
+      script.
+        $(function() {
+          var action;
+          $(".number-spinner button").mousedown(function () {
+            btn = $(this);
+            input = btn.closest('.number-spinner').find('input');
+            btn.closest('.number-spinner').find('button').prop("disabled", false);
+            if (btn.attr('data-dir') == 'up') {
+                action = setInterval(function(){
+                    if ( input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max')) ) {
+                        input.val(parseInt(input.val())+1);
+                    }else{
+                        btn.prop("disabled", true);
+                        clearInterval(action);
+                    }
+                }, 50);
+            } else if (btn.attr('data-dir') == 'dwn') {
+                action = setInterval(function(){
+                    if ( input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min')) ) {
+                      input.val(parseInt(input.val())-1);
+                    }else{
+                      btn.prop("disabled", true);
+                      clearInterval(action);
+                    }
+                }, 50);
+              }
+          }).mouseup(function(){
+            clearInterval(action);
+          });
+        });

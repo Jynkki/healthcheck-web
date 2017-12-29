@@ -1,0 +1,80 @@
+doctype html
+html
+  head
+    title= title
+    meta(content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/tablesorter/dist/css/theme.jui.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    script(src='/tablesorter/dist/js/jquery.tablesorter.min.js')
+    script(src='/tablesorter/dist/js/jquery.tablesorter.widgets.js')
+    script(src='http://listjs.com/no-cdn/list.js')
+    style.
+      .jumbotron {
+      background-color: #00285E;
+      color: #d5d5d5;
+      padding: 100px 25px;
+      }
+      .navbar {
+      margin-bottom: 0pt;
+      background-color: #00285E;
+      z-index: 9999;
+      border: 0;
+      font-size: 15pt !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 0px;
+      border-radius: 0;
+      }
+      .navbar li a, .navbar .navbar-brand {
+        color: #d5d5d5 !important;
+        font-size: 15pt;
+        height:auto;
+        min-height:100%;
+      }
+      .navbar-nav li a:hover, .navbar-nav li.active a {
+        color: #00285E !important;
+        background-color: #d5d5d5 !important;
+      }
+      .navbar-default .navbar-toggle {
+        border-color: transparent;
+        color: #d5d5d5 !important;
+      }
+      .label {
+        background-color: #00285E;
+        font-size: 15pt;
+      }
+      .form-signin .form-control{
+        padding: 10px;
+      }
+    block extraHeader
+  body
+    block pageTitle
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+              span.sr-only 
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='#') BLAB Health Check
+          #myNavbar.collapse.navbar-collapse.navbar-right
+            ul.nav.navbar-nav
+              li
+                a(href='/home') Home
+              li
+                //a(href='/devices') Devices
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  | Devices
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href='/devices') List Devices
+                  li
+                    a(href='/addevices') Add Devices
+              li
+                a(href='/signout') Logout
+    block content
